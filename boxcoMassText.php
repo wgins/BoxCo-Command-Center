@@ -2,6 +2,7 @@
 /* BoxCo. Mass Texting System. This allows users to send mass text to an array. It requires a pin to prevent any unintentional sending of text.
     **WILL GINSBERG**
     **June, 2014**
+    SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
 */
 
 $pin= $_POST['pin'];
