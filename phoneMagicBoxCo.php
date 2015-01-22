@@ -3,14 +3,13 @@
  //Author: Will Ginsberg
  //BoxCo Twilio Handler
  //Description: Allow users to change database entry of phone number. This change then allows other essential Twilio files to redirect calls to on duty manager of boxco.
+ //SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
 date_default_timezone_set('America/Chicago');
 
     		function getEmployee (){
     			 	$time = date('Hi');
-     				
-				
 					$link = mysqli_connect('xxxxxxxx', 'xxxxxxxxx', 'xxxxxxxx', 'xxxxx');
-					$result = mysqli_query($link, "SELECT * FROM `testing` WHERE `ID` = 1");
+					$result = mysqli_query($link, "SELECT * FROM `TEST` WHERE `ID` = 1");
 					$row = mysqli_fetch_array($result);
 					
      				 $currentNum =  $row['1'];
@@ -18,7 +17,6 @@ date_default_timezone_set('America/Chicago');
       					}
     		 $curEmp = getEmployee();
 ?>
-
 <html>
 <head>
 <style>
@@ -84,7 +82,5 @@ WE'RE REDIRECTING CALLS TO:
 </div>
      <hr noshade size=3> 
  </center>
- 
-      
 </body>
 </html>
