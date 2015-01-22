@@ -2,7 +2,9 @@
 
 /*This makes a call to customer for BoxCo. outgoing call system. It requires a pin in order to prevent any unintentional or malicious use of outgoing call feature.
 **WILL GINSBERG**
-**June, 2014** */
+**June, 2014** 
+SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
+*/
 
 $pin= $_POST['pin'];
 $personNum=$_POST['number'];
