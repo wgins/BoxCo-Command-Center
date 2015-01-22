@@ -1,4 +1,75 @@
 # boxco
-BoxCo. Twilio Command Center
+BoxCo. Command Center
+Powered by Twilio
+Will Ginsberg
 
-All Twilio related files for BoxCo. command center.
+Make Outgoing Call:
+xxxxxxxxxxx
+
+Set Phone Redirect (This redirects customers to the manager on duty when customer calls the BoxCo. number and presses “1”)
+xxxxxxxxxxx
+
+Send Text to Customer
+xxxxxxxxxxx (WARNING: Don’t click this unless you know what you’re doing. This is set to run every hour on the 5th and 35th minute, if you click it you will send texts to customers unintentionally)
+
+Send Mass Text (Used for texts to employees)
+Xxxxxxxxxxx (NOTE: In order to use this, you must edit the file /sendMassText.php and enter the numbers you would like to text into the array)
+
+Twilio Account Info (this is used to login to Twilio.com): 
+	USERNAME: xxxxxx PW: xxxxxx
+
+1.	Incoming Call 
+a.	BoxCo. Phone Number – (999) 999 - 9999
+b.	On incoming call:
+i.	Caller is greeted (helloBoxCo.php)
+1.	If the caller presses 1, it redirects to manager on duty. The manager on duty is set through: phoneMagicBoxCo.
+2.	If the caller presses 2, it says “To hear more info, press 2.” This then tells them for more information to visit nuboxco.com
+3.	If a BoxCo. team member presses XXXXXX, they will be entered into the outgoing call center. Once you press XXXXX, the system will prompt you to enter a phone number. The phone number will then be dialed. (NOTE: If you use this method of outgoing call, the callerID will display YOUR PERSONAL NUMBER on their phone, not the BoxCo. phone number.)
+4.	If the caller presses 3, it disconnects. 
+c.	TECHNICAL INFORMATION:
+i.	To change actions of the phone menu, pin for outgoing call, or general edits, change the input handler document. 
+ii.	To change the numbers in Phone Magic you must edit the php file: /phonemagicBoxCo.php. If you want to add or remove users, open the file and simply add the number to the dropdown menu.
+
+2.	Incoming Text
+a.	If a customer texts the BoxCo. number, it automatically replies with the following message:
+i.	“Thank you for contacting BoxCo. Please email us at contact@nuboxco.com with any questions or concerns. Thanks!”
+b.	TECHNICAL INFORMATION:
+i.	To modify this text, edit: /boxcoSMSReply.php
+
+3.	Send Text to Customer:
+a.	TECHNICAL INFORMATION:
+i.	This is all run through a php file: /boxcoTextCustomer.php 
+ii.	This runs automatically and requires no manipulation other than edits to how it operates in general.
+iii.	It queries the database to join xxxx and xxxxxx to find when the customer name, delivery date, and delivery time, and whether a text has been sent to them or not.
+iv.	Once the text has been sent, it updates the column “xxxxxxx” to a 1. A 0 indicates text has not been sent, a 1 indicates that a text HAS been sent. 
+v.	The php file looks at the current time, looks at the scheduled delivery time, then sends a text 30 minutes before scheduled delivery time. Example: If delivery time is 11am or 11:30am, a text is sent a 10:35am.
+vi.	The file also will not send a text unless it is between 6am and 6pm.  This is because the file reads in first **two** numbers in the string “delivery_time” and cannot differentiate between 11am and 11pm, so to combat this problem all  potential repeat times have been eliminated. (This is sort of confusing, and better explained in person. It should never be a problem unless delivery times move late into the evening.)
+vii.	There is a cron job setup in the server to run this php file every day in june,  everyday of the week, every hour on the 5th and 35th minute. To change the cron job:
+1.	SSH
+a.	Ssh USER
+b.	Pw: PASSWORD
+2.	execute command: crontab –e
+3.	edit the file in vim or whatever editor you are using
+4.	WARNING: IF YOU DON’T KNOW WHAT YOU’RE DOING, DON’T DO IT!!!!!!!!
+
+4.	Send Text to Employee or General Mass Text 
+a.	To send a mass text:
+i.	Open the file /boxcoMassText.php in an editor of your choice
+ii.	Modify the $people array, by adding a list of numbers separated by commas in the format shown below
+iii.	Modify the sms body to your liking:
+iv.	Save file to server, then open mass text link
+v.	Enter the PIN: XXXXXXXX
+vi.	Click, “Send Mass Text!”
+vii.	Once you have done so, it is STRONGLY recommended you delete the array of numbers and re-save so that you do not accidentally re-send the same text to that array again.
+
+5.	Make Outgoing Call from BoxCo. Number
+a.	To make an outgoing call from the BoxCo. phone number, go to start call page:
+i.	There are instructions at the top of the page, however:
+1.	Enter the pin: XXXXXXX
+2.	Enter the phone number you want to call in format: 1XXXYYYZZZZ
+3.	Select YOUR name.
+a.	You want to select your name because the way this works is that the system calls you, then connects you to the customer that you want to call. 
+4.	Click “Call!
+a.	You should receive a call from the BoxCo. number, 9999999999, and you will hear that you are then being connected to the customer. 
+
+
