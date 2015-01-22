@@ -3,6 +3,7 @@
 //The file queries the BoxCo. database to determine where the calls should redirect to.
 //Will Ginsberg
 //June, 2014
+//SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
 date_default_timezone_set('America/Chicago');
 //db connect
 $link = mysqli_connect('xxxxxx', 'xxxxx', 'xxxxxxx', 'xxxxxx');
@@ -18,7 +19,7 @@ $time = date('Hi');
       {
           $time = date('Hi');
           $link = mysqli_connect('xxxxxx', 'xxxxxxx', 'xxxxxx', 'xxxxxxx');
-          $result = mysqli_query($link, "SELECT * FROM `testing` WHERE `ID` = 1");
+          $result = mysqli_query($link, "SELECT * FROM `TEST` WHERE `ID` = 1");
           $row = mysqli_fetch_array($result);
           
           $currentNum =  $row['1'];
@@ -56,7 +57,6 @@ else if ($_REQUEST['Digits'] == 'XXXXXXX')
     ?>
     <!-- gather and then redirec that gather to another php file that then 
     takes in the gathered numbers and calls them -->
-    <!-- <Say voice="woman" language="en">Welcome to the call out portal. Enter the number you want to call then press pound.</Say> -->
     <Gather action="outgoingcall.php" method="GET">
       <Say>Welcome to the call out portal. Please enter the number you want to call.></Say>
     </Gather>
