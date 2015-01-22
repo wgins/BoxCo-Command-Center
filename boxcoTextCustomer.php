@@ -3,7 +3,10 @@
 This queries the database, finds user names, phones, pickup dates and times, and then looks to see if customer has been sent a text already or not. If they have, "30 reminder" is marked with a 1, if they haven't "30 reminder" column will be a 0." 
 This is only operational between 6am and 6pm, otherwise it will not execute. This combats problems with am vs pm. 1am vs 1pm, etc. Because pickup times do not occur at 7am and 7pm, we can eliminate the 12 hour period between 6am and 6pm so as not to confuse the system
 **WILL GINSBERG**
-**June, 2014** */
+**June, 2014** 
+SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
+*/
+
 require "/boxco_dev/twilio-php-master/Services/Twilio.php";
 // Set timezone
 date_default_timezone_set('America/Chicago');
@@ -49,20 +52,20 @@ echo $before;
 //Get current date and time
 
 
-$students= $db->query("select tbl_users.user_id, tbl_users.user_fname, tbl_users.user_lname,tbl_users.user_phone, tbl_pickup_dates.pickup_dates,tbl_pickup_times.pickup_time, tbl_users.reminder_30 from tbl_orders join tbl_pickup_dates on tbl_pickup_dates.pickup_dates_id=tbl_orders.pickup_dates_id join tbl_pickup_times on tbl_pickup_times.pickup_times_id=tbl_orders.pickup_times_id join tbl_users on tbl_users.user_id = tbl_orders.user_id where tbl_pickup_dates.pickup_dates = '".$cur_date."' and tbl_users.reminder_30 = 0");
+$students= $db->query("select tbl_test.ID, tbl_test.NAME, tbl_test.LAST,tbl_test.PHONE, tbl_test.DATE,tbl_test.TIME2, tbl_test.REMIND from tbl_test join tbl_DATES on tbl_DATES.DATES_id=tbl_TEST.DATES join tbl_DATES on tbl_TEST.TIMES=tbl_TEST.TIMES join tbl_TEST on tbl_TEST.ID = tbl_TEST.ID where tbl_TEST.DATES = '".$cur_date."' and tbl_users.REMIND = 0");
 
 
 while ($list= $students->fetch_assoc() ){
-	$name= $list['user_fname'];
-	$time= $list['pickup_time'];
-	$to_number= $list['user_phone'];
-	$date= $list['pickup_date'];
-	$id= $list['user_id'];
+	$name= $list['NAME'];
+	$time= $list['TIME'];
+	$to_number= $list['PHONE'];
+	$date= $list['DATE'];
+	$id= $list['ID'];
 
 	$first_part= explode("-", $time);
 	$first_digits= explode(":", $first_part[0]);
 
-	$msg= "Hi $name, this is BoxCo. Your scheduled pickup time is $time, please be ready with your items packed by then. If you have any urgent or serious concerns, you can reach us at (847) 513-9291 and we'd love to help. See you soon!";
+	$msg= "Hi $name, this is BoxCo. Your scheduled pickup time is $time, please be ready with your items packed by then. If you have any urgent or serious concerns, you can reach us at (999) 999-9999 and we'd love to help. See you soon!";
 
 	//print $first_digits[0]." and ".$before."<br>";
 
@@ -73,8 +76,6 @@ while ($list= $students->fetch_assoc() ){
 		print "<br />".$msg;
 		print "<br />";
 		print "<br />";
-
-
 //send text 
 
 		$sms = $client->account->messages->sendMessage(
@@ -84,18 +85,8 @@ while ($list= $students->fetch_assoc() ){
             // the sms body
             $msg
         );
-
         //update db 
-
-       $db->query("UPDATE tbl_users SET reminder_30='1' WHERE user_id= '".$id."' ");
- 
+       $db->query("UPDATE tbl_users SET REMIND='1' WHERE user_id= '".$id."' ");
     }
-
-		//update db 
-
-
-
 }
-
-
 ?>
