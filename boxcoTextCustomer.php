@@ -14,6 +14,7 @@ date_default_timezone_set('America/Chicago');
 //6am - 6pm
 
 $timetest = date('Hi');
+//If the time is between 6pm and 6am, do not run
 if ($timetest < 0600 || $timetest > 1800)
 {
 	print "This form is not operational between 6pm and 6am.";
@@ -30,7 +31,7 @@ if($db->connect_error){
   	die ('Connect Error ('.$db->connect_errno.')'.$db->connect_error);
    }
 
-
+//Twilio authentication information
 $account_sid = 'xxxxxxx'; 
 $auth_token = 'xxxxxxx'; 
 $client = new Services_Twilio($account_sid, $auth_token); 
@@ -41,6 +42,7 @@ $cur_time= date('g:i');
 
 $before=date("g", strtotime("+30 minutes"));
 
+//Testing current date, time, next hour.
 echo "Current Date: ";
 echo $cur_date;
 echo "<br />";
@@ -49,9 +51,10 @@ echo $cur_time;
 echo "<br />";
 echo "Next Hour: ";
 echo $before;
-//Get current date and time
 
 
+//table names have been changed
+//Queries database to find customers with appropriate pickup dates and times and ensures that they have not been texted yet
 $students= $db->query("select tbl_test.ID, tbl_test.NAME, tbl_test.LAST,tbl_test.PHONE, tbl_test.DATE,tbl_test.TIME2, tbl_test.REMIND from tbl_test join tbl_DATES on tbl_DATES.DATES_id=tbl_TEST.DATES join tbl_DATES on tbl_TEST.TIMES=tbl_TEST.TIMES join tbl_TEST on tbl_TEST.ID = tbl_TEST.ID where tbl_TEST.DATES = '".$cur_date."' and tbl_users.REMIND = 0");
 
 
@@ -76,7 +79,7 @@ while ($list= $students->fetch_assoc() ){
 		print "<br />".$msg;
 		print "<br />";
 		print "<br />";
-//send text 
+		//send text 
 
 		$sms = $client->account->messages->sendMessage(
             "9999999999", 
