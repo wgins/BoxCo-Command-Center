@@ -41,7 +41,7 @@ if ($_REQUEST['Digits'] == '1')
 <?php
   }
   
-  //If customer presses two, instructs them to visit the website.
+//If customer presses two, instructs them to visit the website.
 else if ($_REQUEST['Digits'] == '2')
   {
     ?>
@@ -50,7 +50,7 @@ else if ($_REQUEST['Digits'] == '2')
            
 <?php
   }
-  //If customer presses three, also instructs customer to vsiti website.
+//If customer presses three, also instructs customer to vsiti website.
 else if ($_REQUEST['Digits'] == '3')
   { 
     ?>
@@ -58,12 +58,10 @@ else if ($_REQUEST['Digits'] == '3')
    <Hangup/>
     <?php
   }
-  //If employee dials in and enters pin, allows them to make outgoing call. Gathers the number the employee wants to call and then connects.
+//If employee dials in and enters pin, allows them to make outgoing call. Gathers the number the employee wants to call and then connects.
 else if ($_REQUEST['Digits'] == 'XXXXXXX')
   {
     ?>
-    <!-- gather and then redirec that gather to another php file that then 
-    takes in the gathered numbers and calls them -->
     <Gather action="outgoingcall.php" method="GET">
       <Say>Welcome to the call out portal. Please enter the number you want to call.></Say>
     </Gather>
