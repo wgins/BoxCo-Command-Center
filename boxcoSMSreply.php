@@ -1,5 +1,5 @@
 <?php
-/*A simple reply doc that is used for replies to all incoming texts to BoxCo. command center. Edit the message as needed.
+/*A This replies to all incoming texts to BoxCo. command center. Edit the message as needed.
 **WILL GINSBERG**
 **June, 2014** 
 SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
