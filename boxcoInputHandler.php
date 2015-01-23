@@ -47,10 +47,9 @@ else if ($_REQUEST['Digits'] == '2')
     ?>
       <Say voice="woman" language="en">Please visit boxco.com for more information. Thank you.</Say>
       <Hangup/>
-           
 <?php
   }
-//If customer presses three, also instructs customer to vsiti website.
+//If customer presses three they wish to disconnect --> tells them that if they need any more information to visit the website then disconnects.
 else if ($_REQUEST['Digits'] == '3')
   { 
     ?>
