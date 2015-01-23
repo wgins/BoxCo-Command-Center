@@ -10,8 +10,11 @@ $pin= $_POST['pin'];
 $personNum=$_POST['number'];
 $user=$_POST['user'];
 
+/*Takes input from outgoing call html file. User specifies the number they want to call and chooses their name.
+Twilio calls the user and then connects the call to the number specified. */
 
-if($user=="asdfa"){
+//If user chooses clr, system is set to blank.
+if($user=="clr"){
 	$toNumber="";
 }else if($user=="a"){
 	$toNumber="1999999999";
@@ -44,7 +47,7 @@ if($user=="asdfa"){
 }
 
 
-
+//If correct pin is entered, initiate the call. Dials the specified number with callerID of BoxCo.
 if($pin==xxxx){
 
 	$myFile = "call.xml";
@@ -59,8 +62,6 @@ if($pin==xxxx){
 	fwrite($fh, $stringData);
 
 	fclose($fh);
-
-
 	// Include the Twilio PHP library
 	require "/boxco_dev/twilio-php-master/Services/Twilio.php";
 
@@ -91,5 +92,4 @@ if($pin==xxxx){
 }else{
 	print "no pin";
 }
-
-	?>
+?>
