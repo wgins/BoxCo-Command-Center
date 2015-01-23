@@ -1,6 +1,5 @@
 <?php
-// now greet the caller
-//handles incoming calls two boxco command center. edit as needed. then look at input handler to make systematic changes.
+//handles incoming calls to boxco command center. edit as needed. then look at input handler to make systematic changes.
 //will ginsberg
 //june, 2014
 //SENSITIVE DATABASE / TABLE INFORMATION, PHONE NUMBERS, PINS, TWILIO CREDENTIALS HAVE BEEN REMOVED
