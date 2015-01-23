@@ -3,28 +3,15 @@ BoxCo. Command Center
 Powered by Twilio
 Will Ginsberg
 
-Make Outgoing Call:
-xxxxxxxxxxx
+These files are used to create a "command center" for a student-run storage company,BoxCo. 
+Together, the files create the following functionality:
+1)Allows customers to BoxCo and hear a menu and connect to a manager. 
+2)Allows employees/managers to make outgoing calls from their cellphones by either calling the BoxCo number and entering a pin, or using the outgoingcall webpage.
+3)Allows employees/managers to send mass texts
+4)Queries a database of customers, determines pickup time for their packagers, and sends a text 30 minutes before pickup time to alert them that someone will be at their residence. This is done through a cronjob.
+5)Allows managers to set the manager on duty number
 
-------------------
-
-Set Phone Redirect (This redirects customers to the manager on duty when customer calls the BoxCo. number and presses “1”)
-xxxxxxxxxxx
-
-------------------
-
-Send Text to Customer
-xxxxxxxxxxx (WARNING: Don’t click this unless you know what you’re doing. This is set to run every hour on the 5th and 35th minute, if you click it you will send texts to customers unintentionally)
-
-------------------
-
-Send Mass Text (Used for texts to employees)
-Xxxxxxxxxxx (NOTE: In order to use this, you must edit the file /sendMassText.php and enter the numbers you would like to text into the array)
-
-------------------
-
-Twilio Account Info (this is used to login to Twilio.com): 
-	USERNAME: xxxxxx PW: xxxxxx
+Below are instructions made for managers to help better understand how the system works and best practices. 
 
 ------------------
 
@@ -46,7 +33,7 @@ Twilio Account Info (this is used to login to Twilio.com):
 	a.If a customer texts the BoxCo. number, it automatically replies with the following message:
 		i.	“Thank you for contacting BoxCo. Please email us at contact@nuboxco.com with any questions or concerns. 			Thanks!”
 	b.	TECHNICAL INFORMATION:
-	i.	To modify this text, edit: /boxcoSMSReply.php
+		i.	To modify this text, edit: /boxcoSMSReply.php
 
 ------------------
 
@@ -54,10 +41,10 @@ Twilio Account Info (this is used to login to Twilio.com):
 	a.	TECHNICAL INFORMATION:
 		i.	This is all run through a php file: /boxcoTextCustomer.php 
 		ii.	This runs automatically and requires no manipulation other than edits to how it operates in general.
-		iii.	It queries the database to join xxxx and xxxxxx to find when the customer name, delivery date, and 				delivery time, and whether a text has been sent to them or not.
-		iv.	Once the text has been sent, it updates the column “xxxxxxx” to a 1. A 0 indicates text has not been 				sent, a 1 indicates that a text HAS been sent. 
-		v.	The php file looks at the current time, looks at the scheduled delivery time, then sends a text 30 				minutes before scheduled delivery time. Example: If delivery time is 11am or 11:30am, a text is sent a 				10:35am.
-		vi.	The file also will not send a text unless it is between 6am and 6pm.  This is because the file reads in 			first two numbers in the string “delivery_time” and cannot differentiate between 11am and 11pm, so to 				combat this problem all  potential repeat times have been eliminated. (This is sort of confusing, and 				better explained in person. It should never be a problem unless delivery times move late into the 				evening.)
+		iii.	It queries the database to join xxxx and xxxxxx to find when the customer name, delivery date, and delivery time, and whether a text has been sent to them or not.
+		iv.	Once the text has been sent, it updates the column “xxxxxxx” to a 1. A 0 indicates text has not been sent, a 1 indicates that a text HAS been sent. 
+		v.	The php file looks at the current time, looks at the scheduled delivery time, then sends a text 30 minutes before scheduled delivery time. Example: If delivery time is 11am or 11:30am, a text is sent a 				10:35am.
+		vi.	The file will not send a text unless it is between 6am and 6pm.  This is because the file reads in first two numbers in the string “delivery_time” and cannot differentiate between 11am and 11pm, so to 				combat this problem all  potential repeat times have been eliminated. (This is sort of confusing, and 				better explained in person. It should never be a problem unless delivery times move late into the 				evening.)
 		vii.	There is a cron job setup in the server to run this php file every day in june,  everyday of the week, 			every hour on the 5th and 35th minute. To change the cron job:
 			1.	SSH
 				a.	Ssh USER
@@ -68,7 +55,7 @@ Twilio Account Info (this is used to login to Twilio.com):
 
 ------------------
 
-4.	Send Text to Employee or General Mass Text 
+4.	Send Text to Employee or General Mass Text from BoxCo Number
 	a.	To send a mass text:
 		i.	Open the file /boxcoMassText.php in an editor of your choice
 		ii.	Modify the $people array, by adding a list of numbers separated by commas in the format shown below
